@@ -12,6 +12,7 @@ class registry
 public:
     registry() {}
     EntityID create_entity();
+    void erase_entity(EntityID id);
 
 private:
     EntityContainer entities{};

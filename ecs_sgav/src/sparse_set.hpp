@@ -8,6 +8,8 @@ namespace ecg {
 template <typename T>
 class sparse_set
 {
+    static_assert(std::is_base_of<entity_type,T>::value,"");
+
 public:
     sparse_set(){
         reserve(50);
@@ -32,15 +34,15 @@ public:
         }
 
     }
-    bool exists(EntityID val){
+    bool exists(uint64_t val){
         return val < capacity &&
                 sparse[val] < size &&
                 dense[sparse[val]].id == val;
     }
-    void erase(const T& elem){
-        if(exists(elem.id)){
-            dense[sparse[elem.id]] = dense[size - 1];
-            sparse[dense[size - 1].id] = sparse[elem.id];
+    void erase(uint64_t val){
+        if(exists(val)){
+            dense[sparse[val]] = dense[size - 1];
+            sparse[dense[size - 1].id] = sparse[val];
             --size;
         }
     }

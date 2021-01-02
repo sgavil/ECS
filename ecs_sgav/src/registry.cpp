@@ -14,4 +14,9 @@ EntityID registry::create_entity()
     return id;
 }
 
+void registry::erase_entity(EntityID id)
+{
+    entities.erase(id);
+}
+
 }
